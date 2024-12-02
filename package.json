@@ -1,0 +1,12 @@
+{
+  "name": "bakendrev",
+  "version": "1.0.0",
+  "description": "BakendRevision",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jubayar Ahamad",
+  "license": "ISC"
+}
