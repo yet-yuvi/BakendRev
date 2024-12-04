@@ -21,6 +21,11 @@ app.post('/users', (req, res) => {
     res.json(user);
 })
 
+// Retrive all users
+app.get('/users', (req, res) => {
+    res.json(users);
+})
+
 // Start the Server
 const port = 3000;
 app.listen(port, () => {
