@@ -41,6 +41,21 @@ app.get('/users/:id', (req, res) => {
     }
 })
 
+// Update one user by specific ID
+app.put('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const userUpdate = req.body;
+    const userIndex = users.findIndex((u) => u.id == id);
+    if (userIndex !== -1) {
+        let user = users[userIndex];
+        user = {...user, ...userUpdate};
+        res.json(user);
+    }
+    else {
+        res.status(404).json({massage: "User not found"});
+    }
+})
+
 // Start the Server
 const port = 3000;
 app.listen(port, () => {
