@@ -47,7 +47,7 @@ app.put('/users/:id', (req, res) => {
     const userUpdate = req.body;
     const userIndex = users.findIndex((u) => u.id == id);
     if (userIndex !== -1) {
-        users[userIndex] = {...users[userIndex], ...userUpdate};
+        users[userIndex] = {id, ...userUpdate};
         res.json(users[userIndex]);
     }
     else {
