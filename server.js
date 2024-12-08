@@ -55,6 +55,18 @@ app.put('/users/:id', (req, res) => {
     }
 })
 
+// Delete a specific user
+app.delete('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const userIndex = users.findIndex((u) => u.id === id);
+    if(userIndex !== -1) {
+        users.splice(userIndex, 1);
+        res.json({message: "User deleted"});
+    }else {
+        res.status(404).json({message: "User not found"});
+    }
+})
+
 // Start the Server
 const port = 3000;
 app.listen(port, () => {
