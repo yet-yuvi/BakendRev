@@ -1,9 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const connectDB = require('./config/db');
 const app = express();
 
 // Parse request from body JSON
 app.use(bodyParser.json());
+
+// Connect with mongoDB
+connectDB();
 
 // Define a simple route
 app.get('/', (req, res) => {
