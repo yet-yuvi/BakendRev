@@ -59,21 +59,7 @@ router.post("/login", async (req, res) => {
           res.status(401).json({ message: "Password is wrong" });
         } else {
           // Step 5: If password match generate Token
-          const accessToken = jwt.sign(
-            { email: user.email, id: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "90s" }
-          );
-
-          const refreshToken = jwt.sign(
-            { email: user.email, id: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "180s" }
-          );
-          const userObj = user.toJSON();
-          userObj["accessToken"] = accessToken;
-          userObj["refreshToken"] = refreshToken;
-          res.status(200).json(userObj);
+          getUserTokens(user, res);
         }
       }
     } else {
@@ -93,21 +79,7 @@ router.post("/login", async (req, res) => {
               if (!user) {
                 res.status(401).json({ message: "User not found" });
               } else {
-                const accessToken = jwt.sign(
-                  { email: user.email, id: user._id },
-                  process.env.JWT_SECRET,
-                  { expiresIn: "1d" }
-                );
-
-                const refreshToken = jwt.sign(
-                  { email: user.email, id: user._id },
-                  process.env.JWT_SECRET,
-                  { expiresIn: "3d" }
-                );
-                const userObj = user.toJSON();
-                userObj["accessToken"] = accessToken;
-                userObj["refreshToken"] = refreshToken;
-                res.status(200).json(userObj);
+                getUserTokens(user, res);
               }
             }
           }
@@ -238,3 +210,22 @@ router.delete("/", async (req, res) => {
 });
 
 module.exports = router;
+
+function getUserTokens(user, res) {
+  const accessToken = jwt.sign(
+    { email: user.email, id: user._id },
+    process.env.JWT_SECRET,
+    { expiresIn: "90s" }
+  );
+
+  const refreshToken = jwt.sign(
+    { email: user.email, id: user._id },
+    process.env.JWT_SECRET,
+    { expiresIn: "180s" }
+  );
+  const userObj = user.toJSON();
+  userObj["accessToken"] = accessToken;
+  userObj["refreshToken"] = refreshToken;
+  res.status(200).json(userObj);
+}
+
