@@ -164,37 +164,6 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Update one user
-router.put("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const userUpdate = req.body;
-    const newUser = await User.findByIdAndUpdate(id, userUpdate, { new: true });
-    if (newUser) {
-      res.json(newUser);
-    } else {
-      res.status(404).json({ message: "User not found." });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong." });
-  }
-});
-
-// Delete a user
-router.delete("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const deleteUser = await User.findByIdAndDelete(id);
-    if (deleteUser) {
-      res.json({ message: "User has been deleted." });
-    } else {
-      res.status(404).json({ message: "User not found." });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong." });
-  }
-});
-
 // Delete all users
 router.delete("/", async (req, res) => {
   try {

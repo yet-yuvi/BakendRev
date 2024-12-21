@@ -8,14 +8,7 @@ npm i dotenv --save
 npm i bcryptjs --save
 npm i jsonwebtoken --save
 
-Git:
-git init
-git clone "link"
-.gitignore
-
-
-
-// Removed old version code from server.js file
+// Removed old version (Without Database) code from server.js file
 
  let users = [];
  let lastId = 0;
